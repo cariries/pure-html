@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北歐蜜月之旅 2026 行程表</title>
+    <style>
+        :root {
+            --primary: #2980b9;
+            --primary-light: #e8f4f8;
+            --text-main: #333;
+            --text-muted: #666;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --hotel-bg: #fff8e1;
+            --hotel-border: #ffc107;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang HK', 'Microsoft JhengHei', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px 15px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            border-left: 3px solid var(--primary);
+            margin-left: 15px;
+            padding-left: 25px;
+        }
+
+        .day-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            left: -34.5px;
+            top: 20px;
+            border: 3px solid var(--bg-color);
+        }
+
+        .date-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-badge {
+            font-size: 0.9rem;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: normal;
+        }
+
+        .location-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .event-list {
+            list-style: none;
+        }
+
+        .event-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.95rem;
+        }
+
+        .event-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .event-detail {
+            flex: 1;
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: #444;
+            display: inline-block;
+            min-width: 110px;
+        }
+
+        .event-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        .ref-no {
+            font-size: 0.8rem;
+            color: #777;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+
+        .hotel-info {
+            background: var(--hotel-bg);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--hotel-border);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .hotel-info .event-icon {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 600px) {
+            .event-item {
+                flex-direction: column;
+            }
+            .event-icon {
+                margin-bottom: 5px;
+            }
+            .event-time {
+                display: block;
+                margin-bottom: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>💍 北歐蜜月之旅 2026</h1>
+        <div class="subtitle">丹麥 • 法羅群島 • 挪威 • 瑞典</div>
+        <a onclick="history.go(-1);">返回上一頁</a>
+    </header>
+
+    <div class="timeline">
+        
+        <!-- Day 1 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-06-27 (週六) <span class="day-badge">Day 1</span>
+            </div>
+            <div class="location-badge">📍 香港 ➡️ 哥本哈根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">19:40 - 22:50</span> 香港 (HKG) ➡️ 多哈 (DOH)
+                        <div class="event-desc">卡塔爾航空 QR 817 <span class="ref-no">訂單: 9****9</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-06-28 (週日) <span class="day-badge">Day 2</span>
+            </div>
+            <div class="location-badge">📍 哥本哈根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">02:00 - 07:25</span> 多哈 (DOH) ➡️ 哥本哈根 (CPH)
+                        <div class="event-desc">卡塔爾航空 QR 161 <span class="ref-no">訂單: 9****9</span></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿：</strong> Crowne Plaza Copenhagen Towers By IHG (Agoda)
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-06-29 (週一) <span class="day-badge">Day 3</span>
+            </div>
+            <div class="location-badge">📍 哥本哈根 ➡️ 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">12:25 - 13:40</span> 哥本哈根 (CPH) ➡️ 法羅群島 (FAE)
+                        <div class="event-desc">大西洋航空 RC 453 <span class="ref-no">訂單: X****8</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">🚗</span>
+                    <div class="event-detail">
+                        <span class="event-time">14:00</span> 瓦加爾機場 (FAE) 取車
+                        <div class="event-desc">Rent Your Car / 中型 SUV <span class="ref-no">訂單: #4**82</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">🏖️</span>
+                    <div class="event-detail">Do Nothing (休息日)</div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿 (Airbnb)：</strong> Home in Sørvágur<br>
+                    <span style="font-size: 0.85em; color: #666;">1 Mýravegur, Sørvágur, Vágar 380, Faroe Islands</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-06-30 (週二) <span class="day-badge">Day 4</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">📸</span>
+                    <div class="event-detail">超市採買日 / 海上瀑布 (Gasadalur View Point)</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-01 (週三) <span class="day-badge">Day 5</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">⛵</span>
+                    <div class="event-detail">
+                        <span class="event-time">11:00 - 13:00</span> Drangarnir 海上拱門導覽 (Sørvágur 碼頭)
+                        <div class="event-desc">船遊健行 <span class="ref-no">訂單: #12**72</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-02 (週四) <span class="day-badge">Day 6</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🐧</span>
+                    <div class="event-detail">Mykines (觀賞海鸚鵡 Puffin)</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-03 (週五) <span class="day-badge">Day 7</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🏡</span>
+                    <div class="event-detail">Gjógv (童話小鎮)</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 8 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-04 (週六) <span class="day-badge">Day 8</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">Torshavn (市內觀光)</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 9 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-05 (週日) <span class="day-badge">Day 9</span>
+            </div>
+            <div class="location-badge">📍 法羅群島</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">☕</span>
+                    <div class="event-detail">自由活動 / 休息</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 10 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-06 (週一) <span class="day-badge">Day 10</span>
+            </div>
+            <div class="location-badge">📍 法羅群島 ➡️ 哥本哈根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚗</span>
+                    <div class="event-detail">
+                        <span class="event-time">14:00</span> 瓦加爾機場 (FAE) 還車
+                        <div class="event-desc">含海底隧道通行證 <span class="ref-no">訂單: #4**82</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">14:30 - 17:35</span> 法羅群島 (FAE) ➡️ 哥本哈根 (CPH)
+                        <div class="event-desc">大西洋航空 RC 456 <span class="ref-no">訂單: X****8</span></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿 (Airbnb)：</strong> Apartment in Copenhagen<br>
+                    <span style="font-size: 0.85em; color: #666;">Gammel Jernbanevej 14 2tv, Copenhagen, 2500, Denmark</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 11 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-07 (週二) <span class="day-badge">Day 11</span>
+            </div>
+            <div class="location-badge">📍 哥本哈根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">City Walk 城市漫步</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 12 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-08 (週三) <span class="day-badge">Day 12</span>
+            </div>
+            <div class="location-badge">📍 哥本哈根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">City Walk 城市漫步</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 13 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-09 (週四) <span class="day-badge">Day 13</span>
+            </div>
+            <div class="location-badge">📍 哥本哈根 ➡️ 奧斯陸</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">14:20 - 15:30</span> 哥本哈根 (CPH) ➡️ 奧斯陸 (OSL)
+                        <div class="event-desc">北歐挪威航空 D8 3228 <span class="ref-no">訂單: Z****V</span></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿：</strong> Scandic Byporten (Oslo) - Agoda
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 14 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-10 (週五) <span class="day-badge">Day 14</span>
+            </div>
+            <div class="location-badge">📍 奧斯陸 ➡️ 卑爾根 (挪威縮影之旅)</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚄</span>
+                    <div class="event-detail">
+                        <span class="event-time">08:23 - 13:04</span> 奧斯陸 (Oslo S) ➡️ 米達爾 (Myrdal)
+                        <div class="event-desc">挪威國鐵 Vy F4 (Flex 票) <span class="ref-no">訂單: MEH-***-I2O</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">🚂</span>
+                    <div class="event-detail">
+                        <span class="event-time">13:24 - 14:22</span> 米達爾 (Myrdal) ➡️ 弗洛姆 (Flåm)
+                        <div class="event-desc">Vy R45 (高山鐵路) <span class="ref-no">訂單: KHL-***-Y7R</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">🚢</span>
+                    <div class="event-detail">
+                        <span class="event-time">15:30 - 20:45</span> 弗洛姆 (Flåm) ➡️ 卑爾根 (Bergen)
+                        <div class="event-desc">Norled 營運渡輪 (航程 5小時15分) <span class="ref-no">訂單: DFP1****2131</span></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿：</strong> Zander K Hotel (Bergen) - Agoda
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 15 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-11 (週六) <span class="day-badge">Day 15</span>
+            </div>
+            <div class="location-badge">📍 卑爾根</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">City Walk 城市漫步</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 16 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-12 (週日) <span class="day-badge">Day 16</span>
+            </div>
+            <div class="location-badge">📍 卑爾根 ➡️ 斯德哥爾摩</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">17:55 - 19:15</span> 卑爾根 (BGO) ➡️ 斯德哥爾摩 (ARN)
+                        <div class="event-desc">北歐挪威航空 DY 842 <span class="ref-no">訂單: Z****H</span></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿：</strong> Comfort Hotel Arlanda Airport Terminal (Stockholm) - Agoda
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 17 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-13 (週一) <span class="day-badge">Day 17</span>
+            </div>
+            <div class="location-badge">📍 斯德哥爾摩</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚄</span>
+                    <div class="event-detail">
+                        <span class="event-time">10:00</span> 前往市區
+                        <div class="event-desc">Arlanda Express (2 ppl) + SL 3 Days Pass</div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">City Walk 城市漫步</div>
+                </li>
+            </ul>
+            <div class="hotel-info">
+                <span class="event-icon">🏨</span>
+                <div class="event-detail">
+                    <strong>住宿 (Airbnb)：</strong> Apartment in Stockholm<br>
+                    <span style="font-size: 0.85em; color: #666;">Rådmansgatan 46 Apt. 1604, 6th floor, Stockholm, Sweden</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 18 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-14 (週二) <span class="day-badge">Day 18</span>
+            </div>
+            <div class="location-badge">📍 斯德哥爾摩</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">🚶</span>
+                    <div class="event-detail">City Walk 城市漫步</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 19 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-15 (週三) <span class="day-badge">Day 19</span>
+            </div>
+            <div class="location-badge">📍 斯德哥爾摩</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">☕</span>
+                    <div class="event-detail">自由活動</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 20 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-16 (週四) <span class="day-badge">Day 20</span>
+            </div>
+            <div class="location-badge">📍 斯德哥爾摩 ➡️ 曼谷 (轉機)</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">13:50 - 05:50 (+1)</span> 斯德哥爾摩 (ARN) ➡️ 曼谷 (BKK)
+                        <div class="event-desc">泰國航空 TG 961 (跨日航班) <span class="ref-no">訂單: E****K</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Day 21 -->
+        <div class="day-card">
+            <div class="date-title">
+                2026-07-17 (週五) <span class="day-badge">Day 21</span>
+            </div>
+            <div class="location-badge">📍 曼谷 ➡️ 香港</div>
+            <ul class="event-list">
+                <li class="event-item">
+                    <span class="event-icon">✈️</span>
+                    <div class="event-detail">
+                        <span class="event-time">10:30 - 14:20</span> 曼谷 (BKK) ➡️ 香港 (HKG)
+                        <div class="event-desc">泰國航空 TG 628 <span class="ref-no">訂單: E****K</span></div>
+                    </div>
+                </li>
+                <li class="event-item">
+                    <span class="event-icon">💼</span>
+                    <div class="event-detail" style="font-weight: 600; color: #e74c3c;">
+                        旅程結束 - Back to Fucking Hell!
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

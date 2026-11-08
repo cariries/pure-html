@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北歐蜜月之旅 2026 - 互動日程表</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .nordic-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header / Hero Section -->
+    <header class="nordic-gradient text-white py-8 px-4 shadow-md relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_50%)]"></div>
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center relative z-10">
+            <div class="text-center md:text-left mb-6 md:mb-0">
+                <span class="inline-block bg-teal-500/30 text-teal-200 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">2026 Summer</span>
+                <h1 class="text-3xl md:text-4xl font-bold tracking-wide">北歐蜜月之旅 🇸🇪 🇳🇴 🇩🇰</h1>
+                <p class="text-teal-100 mt-1">互動式日程安排與行程參考資料</p>
+            </div>
+            <!-- Countdown Widget -->
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 text-center w-full max-w-[280px]">
+                <p class="text-xs text-teal-200 uppercase tracking-wider font-semibold">距離出發還有</p>
+                <div class="flex justify-center items-baseline gap-1 my-1">
+                    <span id="countdown-days" class="text-4xl font-extrabold text-white">--</span>
+                    <span class="text-sm text-teal-100">天</span>
+                    <span id="countdown-hours" class="text-xl font-bold text-teal-200 ml-2">--</span>
+                    <span class="text-xs text-teal-100">時</span>
+                </div>
+                <p class="text-[10px] text-teal-300">出發日：2026/06/27 19:40 (HKG)</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <button onclick="window.location.href='行程.html'" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">詳細行程</button>
+        <!-- Controls & Filters -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <!-- Search -->
+            <div class="relative w-full md:max-w-xs">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+                <input type="text" id="search-input" placeholder="搜尋地點、車次、代碼..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm">
+            </div>
+            
+            <!-- Category Tabs -->
+            <div class="flex gap-1 bg-slate-100 p-1 rounded-xl w-full md:w-auto overflow-x-auto">
+                <button onclick="filterCategory('all')" id="tab-all" class="tab-btn active px-4 py-1.5 rounded-lg text-xs font-medium transition-all bg-white text-slate-800 shadow-sm">全部</button>
+                <button onclick="filterCategory('flight')" id="tab-flight" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900">✈️ 機票</button>
+                <button onclick="filterCategory('transport')" id="tab-transport" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900">🚗 🚄 🚢 交通</button>
+                <button onclick="filterCategory('activity')" id="tab-activity" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900">⛵ 活動</button>
+            </div>
+        </div>
+
+        <!-- Notification Toast (Hidden by default) -->
+        <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-lg text-xs flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span id="toast-msg">已複製預訂編號</span>
+        </div>
+
+        <!-- Desktop Grid View (Visible on MD and up) -->
+        <div class="hidden md:block bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 text-xs font-semibold tracking-wider">
+                        <th class="py-4 px-6">項目 / 活動</th>
+                        <th class="py-4 px-4">出發日期及時間</th>
+                        <th class="py-4 px-4">到達日期及時間</th>
+                        <th class="py-4 px-4">出發地點</th>
+                        <th class="py-4 px-4">到達地點</th>
+                        <th class="py-4 px-6">詳細資料</th>
+                        <th class="py-4 px-6 text-center">預訂/訂單編號</th>
+                    </tr>
+                </thead>
+                <tbody id="itinerary-table-body" class="divide-y divide-slate-100 text-sm">
+                    <!-- Dynamic Rows Inserted Here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mobile Timeline Card View (Visible on Small Screens) -->
+        <div id="itinerary-cards" class="md:hidden space-y-4">
+            <!-- Dynamic Cards Inserted Here -->
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-500 text-center py-8 px-4 mt-12 border-t border-slate-800">
+        <p class="text-xs">👩‍❤️‍👨 祝你們北歐蜜月之旅旅途愉快，留下一生難忘的美好回憶！</p>
+        <p class="text-[10px] mt-2">© 2026 Nordic Honeymoon Planner. Dynamic interactive display.</p>
+    </footer>
+
+    <!-- Script Section -->
+    <script>
+        // Raw Itinerary Data from the sheet
+        const itineraryData = [
+            { id: 1, type: "flight", item: "✈️ 機票", depTime: "2026/06/27 19:40", arrTime: "2026/06/27 22:50", depLoc: "香港 (HKG)", arrLoc: "多哈 (DOH)", detail: "卡塔爾航空 QR 817", code: "9****9" },
+            { id: 2, type: "flight", item: "✈️ 機票", depTime: "2026/06/28 02:00", arrTime: "2026/06/28 07:25", depLoc: "多哈 (DOH)", arrLoc: "哥本哈根 (CPH)", detail: "卡塔爾航空 QR 161", code: "9****9" },
+            { id: 3, type: "flight", item: "✈️ 機票", depTime: "2026/06/29 12:25", arrTime: "2026/06/29 13:40", depLoc: "哥本哈根 (CPH)", arrLoc: "法羅群島 (FAE)", detail: "大西洋航空 RC 453", code: "X****8" },
+            { id: 4, type: "transport", item: "🚗 租車取車", depTime: "2026/06/29 14:00", arrTime: "-", depLoc: "瓦加爾機場 (FAE)", arrLoc: "--", detail: "Rent Your Car / 中型 SUV", code: "#4**82" },
+            { id: 5, type: "activity", item: "⛵ 船遊健行", depTime: "2026/07/01 11:00", arrTime: "2026/07/01 13:00", depLoc: "Sørvágur 碼頭", arrLoc: "Sørvágur 碼頭", detail: "Drangarnir 海上拱門導覽健行", code: "#12**72" },
+            { id: 6, type: "transport", item: "🚗 租車還車", depTime: "2026/07/06 14:00", arrTime: "-", depLoc: "瓦加爾機場 (FAE)", arrLoc: "--", detail: "歸還車輛 (含海底隧道通行證)", code: "#4**82" },
+            { id: 7, type: "flight", item: "✈️ 機票", depTime: "2026/07/06 14:30", arrTime: "2026/07/06 17:35", depLoc: "法羅群島 (FAE)", arrLoc: "哥本哈根 (CPH)", detail: "大西洋航空 RC 456", code: "X****8" },
+            { id: 8, type: "flight", item: "✈️ 機票", depTime: "2026/07/09 14:20", arrTime: "2026/07/09 15:30", depLoc: "哥本哈根 (CPH)", arrLoc: "奧斯陸 (OSL)", detail: "北歐挪威航空 D8 3228", code: "Z****V" },
+            { id: 9, type: "transport", item: "🚄 火車一程", depTime: "2026/07/10 08:23", arrTime: "2026/07/10 13:04", depLoc: "奧斯陸 (Oslo S)", arrLoc: "米達爾 (Myrdal)", detail: "挪威國鐵 Vy F4 (Flex 票)", code: "MEH-***-I2O" },
+            { id: 10, type: "transport", item: "🚄 火車二程", depTime: "2026/07/10 13:24", arrTime: "2026/07/10 14:22", depLoc: "米達爾 (Myrdal)", arrLoc: "弗洛姆 (Flåm)", detail: "Vy R45 (高山鐵路)", code: "KHL-***-Y7R" },
+            { id: 11, type: "transport", item: "🚢 渡輪船票", depTime: "2026/07/10 15:30", arrTime: "2026/07/10 20:45", depLoc: "弗洛姆 (Flåm)", arrLoc: "卑爾根 (Bergen)", detail: "Norled 營運 (航程 5小時15分)", code: "DFP1****2131" },
+            { id: 12, type: "flight", item: "✈️ 機票", depTime: "2026/07/12 17:55", arrTime: "2026/07/12 19:15", depLoc: "卑爾根 (BGO)", arrLoc: "斯德哥爾摩 (ARN)", detail: "北歐挪威航空 DY 842", code: "Z****H" },
+            { id: 13, type: "transport", item: "🚄 火車快捷", depTime: "2026/07/13 10:00", arrTime: "-", depLoc: "斯德哥爾摩 (ARN)", arrLoc: "--", detail: "Arlanda Express (雙人票)", code: "N/A" },
+            { id: 14, type: "flight", item: "✈️ 機票", depTime: "2026/07/16 13:50", arrTime: "2026/07/17 05:50", depLoc: "斯德哥爾摩 (ARN)", arrLoc: "曼谷 (BKK)", detail: "泰國航空 TG 961 (跨日)", code: "E****K" }
+        ];
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // Initialize display
+        window.onload = function() {
+            renderItinerary();
+            startCountdown();
+
+            // Setup search listener
+            document.getElementById('search-input').addEventListener('input', function(e) {
+                searchQuery = e.target.value.toLowerCase();
+                renderItinerary();
+            });
+        };
+
+        // Render List & Grid based on search and filters
+        function renderItinerary() {
+            const tableBody = document.getElementById('itinerary-table-body');
+            const cardContainer = document.getElementById('itinerary-cards');
+            tableBody.innerHTML = '';
+            cardContainer.innerHTML = '';
+
+            const filtered = itineraryData.filter(item => {
+                // Category Filter
+                if (currentFilter !== 'all' && item.type !== currentFilter) return false;
+                
+                // Search Query
+                if (searchQuery) {
+                    return (
+                        item.item.toLowerCase().includes(searchQuery) ||
+                        item.depLoc.toLowerCase().includes(searchQuery) ||
+                        item.arrLoc.toLowerCase().includes(searchQuery) ||
+                        item.detail.toLowerCase().includes(searchQuery) ||
+                        item.code.toLowerCase().includes(searchQuery)
+                    );
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                const emptyState = `
+                    <tr><td colspan="7" class="py-8 text-center text-slate-400">找不到相符的行程安排</td></tr>
+                `;
+                tableBody.innerHTML = emptyState;
+                cardContainer.innerHTML = `<div class="bg-white rounded-xl p-8 text-center text-slate-400 shadow-sm">找不到相符的行程安排</div>`;
+                return;
+            }
+
+            filtered.forEach(data => {
+                // Table Row (Desktop)
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/80 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-6 font-medium text-slate-900">${getItemBadge(data.item)}</td>
+                    <td class="py-4 px-4 text-slate-600 font-mono text-xs">${data.depTime}</td>
+                    <td class="py-4 px-4 text-slate-600 font-mono text-xs">${data.arrTime}</td>
+                    <td class="py-4 px-4 font-semibold text-slate-700">${data.depLoc}</td>
+                    <td class="py-4 px-4 font-semibold text-slate-700">${data.arrLoc}</td>
+                    <td class="py-4 px-6 text-xs text-slate-600">${data.detail}</td>
+                    <td class="py-4 px-6 text-center">
+                        ${data.code !== 'N/A' ? `
+                            <button onclick="copyToClipboard('${data.code}')" class="group relative bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-700 px-3 py-1 rounded-lg text-xs font-mono transition-all border border-slate-200 hover:border-teal-300">
+                                ${data.code}
+                                <span class="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-[10px] py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">點擊複製</span>
+                            </button>
+                        ` : '<span class="text-slate-300">-</span>'}
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+
+                // Card (Mobile)
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start border-b border-slate-100 pb-2">
+                        <div>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${getCategoryClass(data.type)}">${data.item}</span>
+                        </div>
+                        ${data.code !== 'N/A' ? `
+                            <button onclick="copyToClipboard('${data.code}')" class="text-xs font-mono bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200">
+                                代碼: <span class="font-bold text-slate-900">${data.code}</span> 📋
+                            </button>
+                        ` : ''}
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <p class="text-slate-400">🛫 出發地點 / 時間</p>
+                            <p class="font-bold text-slate-800 text-sm mt-0.5">${data.depLoc}</p>
+                            <p class="text-slate-500 font-mono mt-0.5 text-[11px]">${data.depTime}</p>
+                        </div>
+                        <div>
+                            <p class="text-slate-400">🛬 到達地點 / 時間</p>
+                            <p class="font-bold text-slate-800 text-sm mt-0.5">${data.arrLoc}</p>
+                            <p class="text-slate-500 font-mono mt-0.5 text-[11px]">${data.arrTime}</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-3 text-xs border border-slate-100">
+                        <span class="text-slate-400 block mb-0.5">詳細說明</span>
+                        <span class="font-medium text-slate-700">${data.detail}</span>
+                    </div>
+                `;
+                cardContainer.appendChild(card);
+            });
+        }
+
+        // Color badges for item categories
+        function getItemBadge(item) {
+            if (item.includes("機票")) return `<span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">✈️ 機票</span>`;
+            if (item.includes("租車")) return `<span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100">🚗 租車</span>`;
+            if (item.includes("火車")) return `<span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">🚄 火車</span>`;
+            if (item.includes("渡輪")) return `<span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">🚢 渡輪</span>`;
+            return `<span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-100">⛵ 活動</span>`;
+        }
+
+        function getCategoryClass(type) {
+            if (type === 'flight') return 'bg-blue-50 text-blue-700 border border-blue-100';
+            if (type === 'transport') return 'bg-amber-50 text-amber-700 border border-amber-100';
+            return 'bg-purple-50 text-purple-700 border border-purple-100';
+        }
+
+        // Clipboard Copy Utility
+        function copyToClipboard(text) {
+            // Using recommended fallback approach
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast(`已複製代碼: ${text}`);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.className = toast.className.replace("translate-y-20 opacity-0", "translate-y-0 opacity-100");
+            setTimeout(() => {
+                toast.className = toast.className.replace("translate-y-0 opacity-100", "translate-y-20 opacity-0");
+            }, 2500);
+        }
+
+        // Category tabs filter switching
+        function filterCategory(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900";
+            });
+            const activeTab = document.getElementById(`tab-${cat}`);
+            activeTab.className = "tab-btn active px-4 py-1.5 rounded-lg text-xs font-medium transition-all bg-white text-slate-800 shadow-sm";
+            renderItinerary();
+        }
+
+        // Live Countdown Clock (Departure 2026/06/27 19:40)
+        function startCountdown() {
+            const targetDate = new Date("2026/06/27 19:40:00").getTime();
+
+            function update() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference <= 0) {
+                    document.getElementById('countdown-days').innerText = "00";
+                    document.getElementById('countdown-hours').innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                document.getElementById('countdown-days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('countdown-hours').innerText = hours.toString().padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 60000); // Update every minute
+        }
+    </script>
+</body>
+</html>
